@@ -25,3 +25,15 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Personal user data - NEVER COMMIT
+context.md
+knowledge/
+data/
+
+# Body composition files (may contain personal health data)
+*.pdf
+!docs/*.pdf
+
+# User-specific configuration
+.mcp.json
