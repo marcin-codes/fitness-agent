@@ -72,12 +72,13 @@ All settings are saved to `context.md` so you won't be asked again in future ses
 
 ### `update`
 
-Type **"update"** anytime to refresh your data:
+Type **"update"** anytime to refresh your data and get feedback:
 
 - Scans `~/fitness-advisor/data/` for new body composition files
 - Downloads last 30 days of workouts from linked platforms
 - Updates `context.md` with new measurements and training data
 - Reports a summary of changes and progress
+- **Reviews your progress against your goals** with science-backed feedback and recommendations
 
 **Example output:**
 ```
@@ -92,6 +93,16 @@ Workouts (Hevy - last 30 days):
 - 16 workouts completed
 - Total volume: 245,000 kg
 - PR: Bench Press 100kg x 5
+
+📈 Progress Review (Goal: Build Muscle)
+You're on track! Your muscle mass increased while body fat decreased -
+a sign of effective recomposition. Your training volume (15 sets/week
+per muscle group) aligns with hypertrophy research (Schoenfeld et al.).
+
+Recommendations:
+- Consider adding 1-2 sets to lagging muscle groups
+- Your bench press progressed well - maintain current progression scheme
+- Ensure protein intake stays at 1.6-2.2g/kg for optimal muscle protein synthesis
 ```
 
 ## Installation

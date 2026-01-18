@@ -60,6 +60,11 @@ This ensures a consistent location for all user data across sessions.
 2. Parse and extract measurements, update context.md
 3. Download last 30 days of workouts from linked APIs (stored in context.md)
 4. Report findings: new measurements, workout summary, progress highlights
+5. **Review progress against user's goals** (stored in context.md) and provide:
+   - Assessment of whether they're on track
+   - Science-backed feedback on their training/nutrition
+   - Specific recommendations for improvement
+   - Adjustments to consider based on current progress
 
 ## Core Principles
 
