@@ -10,6 +10,41 @@ An evidence-based fitness guidance agent for Claude Code with integrations for p
 - **Platform Integrations**: Connect to Hevy, Strava, Fitbit, Garmin, and Under Armour/MapMyFitness
 - **`/fitness` Shortcut**: Quick access to the fitness advisor from anywhere in Claude Code
 - **Myth Busting**: Get scientific analysis of fitness trends and claims
+- **Personalized Context**: Remembers your goals, training history, and preferences across sessions
+- **Body Composition Tracking**: Reads measurements from Tanita, InBody, or manual entries
+
+## User Data Folder
+
+On first startup, the agent automatically creates a folder structure in your home directory to store your personal fitness data:
+
+```
+~/fitness-advisor/
+├── context.md          # Your personal context (goals, history, preferences)
+├── data/               # Body composition measurements
+│   ├── inbody-2024-01-15.pdf
+│   ├── tanita-scan.jpg
+│   └── measurements.txt
+└── knowledge/          # Saved articles and debunked myths
+    ├── debunked-cardio-kills-gains.md
+    └── debunked-meal-timing.md
+```
+
+### Folder Purposes
+
+| Folder/File | Purpose |
+|-------------|---------|
+| `context.md` | Stores your training history, goals, preferences, and body composition trends. Updated automatically as you chat. |
+| `data/` | Place your body composition reports here (PDFs, images, or text files from Tanita, InBody, or manual measurements). The agent reads these to track your progress. |
+| `knowledge/` | When you ask about fitness myths, the agent offers to save the debunking as a reference file here. |
+
+### Supported Measurement Formats
+
+The agent can read body composition data from:
+- **PDF reports** from InBody, Tanita, or similar bioimpedance analyzers
+- **Images** (photos or screenshots of measurement printouts)
+- **Text files** with manually entered data
+
+Simply drop your measurement files into `~/fitness-advisor/data/` and the agent will parse them automatically.
 
 ## Installation
 
