@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "hevy": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/hevy-mcp-server"],
+      "env": {
+        "HEVY_API_KEY": "${HEVY_API_KEY}"
+      },
+      "_comment": "Hevy workout tracking - Get API key at https://hevy.com/settings?developer (requires Pro subscription)",
+      "_docs": "https://api.hevyapp.com/docs/"
+    },
+    "strava": {
+      "type": "http",
+      "url": "https://www.strava.com/api/v3",
+      "headers": {
+        "Authorization": "Bearer ${STRAVA_ACCESS_TOKEN}"
+      },
+      "_comment": "Strava - Create app at https://www.strava.com/settings/api",
+      "_docs": "https://developers.strava.com/docs/"
+    },
+    "fitbit": {
+      "type": "http",
+      "url": "https://api.fitbit.com",
+      "headers": {
+        "Authorization": "Bearer ${FITBIT_ACCESS_TOKEN}"
+      },
+      "_comment": "Fitbit - Register at https://dev.fitbit.com/apps/new",
+      "_docs": "https://dev.fitbit.com/build/reference/web-api/"
+    },
+    "garmin": {
+      "type": "http",
+      "url": "https://apis.garmin.com",
+      "headers": {
+        "Authorization": "Bearer ${GARMIN_ACCESS_TOKEN}"
+      },
+      "_comment": "Garmin - Apply at https://developer.garmin.com/gc-developer-program/",
+      "_docs": "https://developer.garmin.com/gc-developer-program/"
+    },
+    "mapmyfitness": {
+      "type": "http",
+      "url": "https://api.ua.com",
+      "headers": {
+        "Authorization": "Bearer ${UA_ACCESS_TOKEN}",
+        "Api-Key": "${UA_CLIENT_ID}"
+      },
+      "_comment": "Under Armour/MapMyFitness - Register at https://developer.underarmour.com/",
+      "_docs": "https://developer.underarmour.com/docs/"
+    }
+  }
+}
