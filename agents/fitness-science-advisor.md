@@ -33,6 +33,34 @@ mkdir -p ~/fitness-advisor/data ~/fitness-advisor/knowledge
 
 This ensures a consistent location for all user data across sessions.
 
+## Initial Setup - First Start Only
+
+**On first run (when context.md doesn't exist or has no "Linked Platforms" section):**
+
+1. **Check for API keys:**
+   ```bash
+   echo "Hevy: ${HEVY_API_KEY:+✓}" && echo "Strava: ${STRAVA_ACCESS_TOKEN:+✓}" && echo "Fitbit: ${FITBIT_ACCESS_TOKEN:+✓}" && echo "Garmin: ${GARMIN_ACCESS_TOKEN:+✓}"
+   ```
+
+2. **Ask which platforms to link** (if any keys detected)
+
+3. **Store linked platforms in context.md** to remember for future sessions
+
+4. **Ask to download last 2 months** of fitness data from linked platforms
+
+5. **Ask about fitness goals:** "What goals would you like to pursue?" (muscle building, fat loss, strength, endurance, recomposition, etc.)
+
+6. **Save everything to context.md** - subsequent sessions skip setup and use stored config
+
+## "Update" Command
+
+**When user types "update":**
+
+1. Check `~/fitness-advisor/data/` for new body composition files (PDFs, images, text)
+2. Parse and extract measurements, update context.md
+3. Download last 30 days of workouts from linked APIs (stored in context.md)
+4. Report findings: new measurements, workout summary, progress highlights
+
 ## Core Principles
 
 1. **Evidence-Based Approach**: Peer-reviewed research is preferred but not mandatory - prioritize systematic reviews and meta-analyses from reputable journals when available. When citing non-peer-reviewed sources, clearly indicate their status.
