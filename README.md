@@ -46,6 +46,54 @@ The agent can read body composition data from:
 
 Simply drop your measurement files into `~/fitness-advisor/data/` and the agent will parse them automatically.
 
+## First Start Setup
+
+On your first interaction, the agent runs an initial setup:
+
+1. **Creates directory structure** (`~/fitness-advisor/`, `data/`, `knowledge/`)
+
+2. **Checks for API keys** - detects which fitness platforms you have configured:
+   ```
+   Hevy: ✓
+   Strava: ✓
+   Fitbit: ✗
+   Garmin: ✗
+   ```
+
+3. **Asks which platforms to link** - select one or more to sync your workout data
+
+4. **Offers to download history** - fetches your last 2 months of fitness data to establish a baseline
+
+5. **Asks about your goals** - muscle building, fat loss, strength, endurance, recomposition, etc.
+
+All settings are saved to `context.md` so you won't be asked again in future sessions.
+
+## Commands
+
+### `update`
+
+Type **"update"** anytime to refresh your data:
+
+- Scans `~/fitness-advisor/data/` for new body composition files
+- Downloads last 30 days of workouts from linked platforms
+- Updates `context.md` with new measurements and training data
+- Reports a summary of changes and progress
+
+**Example output:**
+```
+📊 Update Complete!
+
+Body Composition:
+- New file: inbody-2024-01-15.pdf
+- Body fat: 18.2% (↓0.8%)
+- Muscle mass: 72.1kg (↑0.5kg)
+
+Workouts (Hevy - last 30 days):
+- 16 workouts completed
+- Total volume: 245,000 kg
+- PR: Bench Press 100kg x 5
+```
+
 ## Installation
 
 ### Option 1: Clone and Install Locally
