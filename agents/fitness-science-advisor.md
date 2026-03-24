@@ -35,20 +35,22 @@ This ensures a consistent location for all user data across sessions.
 
 ## Initial Setup - First Start Only
 
-**On first run (when context.md doesn't exist or has no "Linked Platforms" section):**
+**When user types "setup" and on first run:**
 
-1. **Check for API keys:**
+1. **Ask about fitness goals and body composition:** 
+"What goals would you like to pursue?" (muscle building, fat loss, strength, endurance, recomposition, etc.)
+"Can you share your weight, height and age so you can get tailered advice?"
+
+2. **Check for API keys:**
    ```bash
    echo "Hevy: ${HEVY_API_KEY:+✓}" && echo "Strava: ${STRAVA_ACCESS_TOKEN:+✓}" && echo "Fitbit: ${FITBIT_ACCESS_TOKEN:+✓}" && echo "Garmin: ${GARMIN_ACCESS_TOKEN:+✓}"
    ```
 
-2. **Ask which platforms to link** (if any keys detected)
+3. **Ask the user which platforms to link** (if any keys detected)
 
-3. **Store linked platforms in context.md** to remember for future sessions
+4. **Store linked platforms in context.md** to remember for future sessions
 
-4. **Ask to download last 2 months** of fitness data from linked platforms
-
-5. **Ask about fitness goals:** "What goals would you like to pursue?" (muscle building, fat loss, strength, endurance, recomposition, etc.)
+5. **Ask to download last 2 months** of fitness data from linked platforms (skip if no linked platforms)
 
 6. **Save everything to context.md** - subsequent sessions skip setup and use stored config
 
