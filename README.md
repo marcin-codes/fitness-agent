@@ -9,9 +9,11 @@ An evidence-based fitness guidance agent for Claude Code with integrations for p
 - **Evidence-Based Guidance**: Workout programming, nutrition science, body composition, and exercise physiology based on peer-reviewed research
 - **Platform Integrations**: Connect to Hevy, Strava, Fitbit, Garmin, and Under Armour/MapMyFitness
 - **`/fitness` Shortcut**: Quick access to the fitness advisor from anywhere in Claude Code
-- **Myth Busting**: Get scientific analysis of fitness trends and claims
+- **Myth Busting**: Get scientific analysis of fitness trends and claims with citations and links
 - **Personalized Context**: Remembers your goals, training history, and preferences across sessions
 - **Body Composition Tracking**: Reads measurements from Tanita, InBody, or manual entries
+- **Personal Records Tracking**: Log and track PRs over time with the `pr` command
+- **Event Logging**: Track injuries, illness, and life events that affect training with the `event` command
 
 ## User Data Folder
 
@@ -79,22 +81,23 @@ Type **"update"** anytime to refresh your data and get feedback:
 - Updates `context.md` with new measurements and training data
 - Reports a summary of changes and progress
 - **Reviews your progress against your goals** with science-backed feedback and recommendations
+- Pulls any new PRs from the data folder or API and adds them chronologically to the "Personal Records" section in `context.md`
 
 **Example output:**
 ```
-📊 Update Complete!
+Update Complete!
 
 Body Composition:
 - New file: inbody-2024-01-15.pdf
-- Body fat: 18.2% (↓0.8%)
-- Muscle mass: 72.1kg (↑0.5kg)
+- Body fat: 18.2% (down 0.8%)
+- Muscle mass: 72.1kg (up 0.5kg)
 
 Workouts (Hevy - last 30 days):
 - 16 workouts completed
 - Total volume: 245,000 kg
 - PR: Bench Press 100kg x 5
 
-📈 Progress Review (Goal: Build Muscle)
+Progress Review (Goal: Build Muscle)
 You're on track! Your muscle mass increased while body fat decreased -
 a sign of effective recomposition. Your training volume (15 sets/week
 per muscle group) aligns with hypertrophy research (Schoenfeld et al.).
@@ -103,6 +106,32 @@ Recommendations:
 - Consider adding 1-2 sets to lagging muscle groups
 - Your bench press progressed well - maintain current progression scheme
 - Ensure protein intake stays at 1.6-2.2g/kg for optimal muscle protein synthesis
+```
+
+### `event <description>`
+
+Type **"event"** followed by a description to log a significant life or health event that may affect your training:
+
+- Adds the event chronologically to an "Events" section in `context.md` (creates it if it doesn't exist)
+- Provides science-based suggestions on how to adjust training in the coming period
+- Takes into account past events from your history when relevant
+
+**Example:**
+```
+event sprained my left ankle during a run, mild pain when bearing weight
+```
+
+### `pr <description>`
+
+Type **"pr"** followed by your personal record to log an individual achievement:
+
+- Adds the PR chronologically to a "Personal Records" section in `context.md` (creates it if it doesn't exist, placed above "Events")
+- Reviews your last 6 months of PRs to summarize overall progress
+- Historical PRs are never removed or overwritten — they serve as a permanent track record
+
+**Example:**
+```
+pr Deadlift 180kg x 1 - new 1RM
 ```
 
 ## Installation
