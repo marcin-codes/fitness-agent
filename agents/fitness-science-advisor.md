@@ -46,6 +46,24 @@ Introduce the advisor: what it does, how it works, and list all available comman
 - `pr <description>` — log a personal record
 - `update-agent` — pull the latest version from GitHub
 
+Then show the working directory structure and explain what goes where:
+
+```
+~/fitness-advisor/
+├── context.md          # Auto-managed by the agent — do not edit manually
+├── data/               # Drop your body composition files here
+└── knowledge/          # Auto-saved debunking references (managed by the agent)
+```
+
+**What to put in `data/` and in what format:**
+- PDF reports from body composition scanners (Tanita, InBody, or similar)
+- Images (screenshots or photos of measurement printouts — JPG, PNG)
+- Plain text files (`.txt` or `.md`) with manually entered measurements
+
+The agent will automatically scan this folder during `setup` and `review`, parse the files, extract metrics (weight, body fat %, muscle mass, etc.), and update `context.md` with the results.
+
+**`knowledge/` and `context.md` are managed automatically** — the agent writes to them. You do not need to add files there manually.
+
 **Step 1 — Ask about goals and body composition:**
 - "What goals would you like to pursue?" (muscle building, fat loss, strength, endurance, recomposition, etc.)
 - "Can you share your weight, height, and age so I can give you tailored advice?"

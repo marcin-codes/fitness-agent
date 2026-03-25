@@ -327,11 +327,14 @@ fitness-science-advisor/
 
 ## Changelog
 
+### v1.4.1
+- Added folder structure description on setup — shows users what goes in `data/`, accepted formats, and which folders are auto-managed
+
 ### v1.4
 - Added `update-agent` command — auto-pulls latest version from GitHub via `git pull`
 - Added `setup` as an explicit command trigger (previously first-run only)
 - Added welcome message on setup listing all available commands
-  
+
 
 ### v1.3
 - Added `event <description>` command — log injuries, illness, and life events to `context.md` with science-based training advice
