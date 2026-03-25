@@ -4,24 +4,29 @@ An evidence-based fitness guidance agent for Claude Code with integrations for p
 
 **Author:** [Marcin Konkel](https://marcinkonkel.com)
 
+---
+
 ## Features
 
-- **Evidence-Based Guidance**: Workout programming, nutrition science, body composition, and exercise physiology based on peer-reviewed research
+- **Evidence-Based Guidance**: Workout programming, nutrition science, body composition, and exercise physiology based on peer-reviewed research with citations and links
 - **Platform Integrations**: Connect to Hevy, Strava, Fitbit, Garmin, and Under Armour/MapMyFitness
 - **`/fitness` Shortcut**: Quick access to the fitness advisor from anywhere in Claude Code
-- **Myth Busting**: Get scientific analysis of fitness trends and claims with citations and links
+- **Myth Busting**: Scientific analysis of fitness trends and claims with quotations, researcher names, and links
 - **Personalized Context**: Remembers your goals, training history, and preferences across sessions
 - **Body Composition Tracking**: Reads measurements from Tanita, InBody, or manual entries
 - **Personal Records Tracking**: Log and track PRs over time with the `pr` command
 - **Event Logging**: Track injuries, illness, and life events that affect training with the `event` command
+- **Self-Updating**: Pull the latest version from GitHub with the `update-agent` command
+
+---
 
 ## User Data Folder
 
-On first startup, the agent automatically creates a folder structure in your home directory to store your personal fitness data:
+On first startup, the agent automatically creates a folder structure in your home directory:
 
 ```
 ~/fitness-advisor/
-├── context.md          # Your personal context (goals, history, preferences)
+├── context.md          # Your personal context (goals, history, preferences, PRs, events)
 ├── data/               # Body composition measurements
 │   ├── inbody-2024-01-15.pdf
 │   ├── tanita-scan.jpg
@@ -31,61 +36,47 @@ On first startup, the agent automatically creates a folder structure in your hom
     └── debunked-meal-timing.md
 ```
 
-### Folder Purposes
-
 | Folder/File | Purpose |
 |-------------|---------|
-| `context.md` | Stores your training history, goals, preferences, and body composition trends. Updated automatically as you chat. |
-| `data/` | Place your body composition reports here (PDFs, images, or text files from Tanita, InBody, or manual measurements). The agent reads these to track your progress. |
+| `context.md` | Stores your training history, goals, preferences, body composition trends, personal records, and logged events. Updated automatically as you chat. |
+| `data/` | Place your body composition reports here (PDFs, images, or text files). The agent reads these to track your progress. |
 | `knowledge/` | When you ask about fitness myths, the agent offers to save the debunking as a reference file here. |
 
-### Supported Measurement Formats
+**Supported measurement formats:** PDF reports from InBody, Tanita, or similar bioimpedance analyzers; images (photos or screenshots); text files with manually entered data.
 
-The agent can read body composition data from:
-- **PDF reports** from InBody, Tanita, or similar bioimpedance analyzers
-- **Images** (photos or screenshots of measurement printouts)
-- **Text files** with manually entered data
-
-Simply drop your measurement files into `~/fitness-advisor/data/` and the agent will parse them automatically.
+---
 
 ## First Start Setup
 
-On your first interaction, the agent runs an initial setup:
+On your first interaction (or when you type `setup`), the agent runs an initial setup:
 
-1. **Creates directory structure** (`~/fitness-advisor/`, `data/`, `knowledge/`)
-
-2. **Checks for API keys** - detects which fitness platforms you have configured:
-   ```
-   Hevy: ✓
-   Strava: ✓
-   Fitbit: ✗
-   Garmin: ✗
-   ```
-
-3. **Asks which platforms to link** - select one or more to sync your workout data
-
-4. **Offers to download history** - fetches your last 2 months of fitness data to establish a baseline
-
-5. **Asks about your goals** - muscle building, fat loss, strength, endurance, recomposition, etc.
+1. **Welcomes you** and explains all available commands
+2. **Asks about your goals** — muscle building, fat loss, strength, endurance, recomposition, etc.
+3. **Asks for body stats** — weight, height, and age for tailored advice
+4. **Checks for API keys** — detects which fitness platforms you have configured
+5. **Asks which platforms to link** — select one or more to sync your workout data
+6. **Offers to download history** — fetches your last 2 months of fitness data to establish a baseline
 
 All settings are saved to `context.md` so you won't be asked again in future sessions.
 
+---
+
 ## Commands
 
-### `update`
+### `review`
 
-Type **"update"** anytime to refresh your data and get feedback:
+Refresh your data and get a progress report:
 
 - Scans `~/fitness-advisor/data/` for new body composition files
 - Downloads last 30 days of workouts from linked platforms
 - Updates `context.md` with new measurements and training data
 - Reports a summary of changes and progress
-- **Reviews your progress against your goals** with science-backed feedback and recommendations
+- Reviews your progress against your goals with science-backed feedback and recommendations
 - Pulls any new PRs from the data folder or API and adds them chronologically to the "Personal Records" section in `context.md`
 
 **Example output:**
 ```
-Update Complete!
+Review Complete
 
 Body Composition:
 - New file: inbody-2024-01-15.pdf
@@ -108,12 +99,14 @@ Recommendations:
 - Ensure protein intake stays at 1.6-2.2g/kg for optimal muscle protein synthesis
 ```
 
+---
+
 ### `event <description>`
 
-Type **"event"** followed by a description to log a significant life or health event that may affect your training:
+Log a health or life event that may affect your training:
 
-- Adds the event chronologically to an "Events" section in `context.md` (creates it if it doesn't exist)
-- Provides science-based suggestions on how to adjust training in the coming period
+- Appends the event chronologically to an "Events" section in `context.md`
+- Provides science-based suggestions on how to adjust training
 - Takes into account past events from your history when relevant
 
 **Example:**
@@ -121,47 +114,82 @@ Type **"event"** followed by a description to log a significant life or health e
 event sprained my left ankle during a run, mild pain when bearing weight
 ```
 
+---
+
 ### `pr <description>`
 
-Type **"pr"** followed by your personal record to log an individual achievement:
+Log a personal record or individual achievement:
 
-- Adds the PR chronologically to a "Personal Records" section in `context.md` (creates it if it doesn't exist, placed above "Events")
-- Reviews your last 6 months of PRs to summarize overall progress
-- Historical PRs are never removed or overwritten — they serve as a permanent track record
+- Appends the PR chronologically to a "Personal Records" section in `context.md`
+- Summarizes your overall progress across the last 6 months
+- Historical PRs are never removed — they serve as a permanent track record
 
 **Example:**
 ```
 pr Deadlift 180kg x 1 - new 1RM
 ```
 
+---
+
+### `update-agent`
+
+Pull the latest version of the agent from GitHub:
+
+- Automatically locates the installation directory
+- Runs `git pull origin main`
+- Reports what changed or confirms the agent is up to date
+- Prompts you to restart Claude Code if needed
+
+**Example:**
+```
+update-agent
+```
+
+---
+
+## Updating
+
+### Via command (recommended)
+
+Simply type `update-agent` in any conversation with the fitness advisor. It will find the repo and pull the latest version automatically.
+
+### Manual update
+
+```bash
+cd /path/to/fitness-science-advisor
+git pull origin main
+```
+
+Changes take effect on the next Claude Code session.
+
+---
+
 ## Installation
 
 ### Option 1: Clone and Install Locally
 
 ```bash
-# Clone the repository
-git clone https://github.com/marcinkonkel/fitness-science-advisor.git
-
-# Install in Claude Code
-claude /plugin install /path/to/fitness-science-advisor
+git clone https://github.com/marcin-codes/fitness-agent.git
+claude /plugin install /path/to/fitness-agent
 ```
 
 ### Option 2: Install Directly from GitHub
 
 ```bash
-# In Claude Code
-/plugin install marcinkonkel/fitness-science-advisor
+/plugin install marcin-codes/fitness-agent
 ```
+
+---
 
 ## Usage
 
-### Quick Commands
+### Quick Start
 
 ```bash
 # Use the /fitness shortcut
 /fitness What's the optimal protein intake for muscle growth?
 
-# Or just ask - the agent auto-activates for fitness questions
+# Or just ask directly
 "Design a 4-day upper/lower split for hypertrophy"
 "How many sets per week for optimal muscle growth?"
 "Is creatine worth taking?"
@@ -175,9 +203,9 @@ claude /plugin install /path/to/fitness-science-advisor
 - "How important is sleep for muscle recovery?"
 - "What supplements actually have scientific support?"
 
-## Fitness Platform Integrations (Optional)
+---
 
-Connect your fitness tracking accounts to analyze your personal data.
+## Fitness Platform Integrations (Optional)
 
 ### Supported Platforms
 
@@ -193,32 +221,26 @@ Connect your fitness tracking accounts to analyze your personal data.
 
 #### Step 1: Get Your API Credentials
 
-Each platform requires you to register as a developer:
-
 **Hevy** (Requires Pro subscription)
 1. Go to https://hevy.com/settings?developer
 2. Generate your API key
 
 **Strava**
 1. Go to https://www.strava.com/settings/api
-2. Create an application
-3. Note your Client ID, Client Secret
-4. Use the [Playground](https://developers.strava.com/playground) to get access tokens
+2. Create an application and note your Client ID and Client Secret
+3. Use the [Playground](https://developers.strava.com/playground) to get access tokens
 
 **Fitbit**
 1. Go to https://dev.fitbit.com/apps/new
-2. Register your application
-3. Complete OAuth flow to get access token
+2. Register your application and complete the OAuth flow
 
 **Garmin**
 1. Apply at https://developer.garmin.com/gc-developer-program/
 2. Wait for approval (free for developers)
-3. Access your Consumer Key and Secret
 
 **Under Armour / MapMyFitness**
 1. Register at https://developer.underarmour.com/
-2. Create an application
-3. Note your Client ID and Secret
+2. Create an application and note your Client ID and Secret
 
 #### Step 2: Set Environment Variables
 
@@ -258,39 +280,41 @@ source ~/.zshrc  # or ~/.bashrc
 #### Step 3: Enable MCP Configuration
 
 ```bash
-# Copy the example config
 cp .mcp.json.example .mcp.json
-
-# The config uses environment variables, so your credentials stay secure
 ```
+
+The config uses environment variables, so your credentials stay secure.
+
+---
 
 ## Directory Structure
 
 ```
 fitness-science-advisor/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
+│   └── plugin.json                      # Plugin manifest
 ├── agents/
-│   └── fitness-science-advisor.md   # Main agent definition
+│   └── fitness-science-advisor.md       # Main agent definition
 ├── skills/
 │   └── fitness/
-│       └── SKILL.md         # /fitness shortcut
-├── .mcp.json.example        # API config template (no real credentials)
-├── .gitignore               # Keeps your credentials safe
-├── README.md                # This file
-└── LICENSE                  # CC BY-NC 4.0 License
+│       └── SKILL.md                     # /fitness shortcut
+├── .mcp.json.example                    # API config template (no real credentials)
+├── .gitignore                           # Keeps your credentials safe
+├── README.md                            # This file
+└── LICENSE                              # CC BY-NC 4.0 License
 ```
+
+---
 
 ## Security Notes
 
-- **Never commit `.mcp.json`** with real API keys - it's in `.gitignore`
+- **Never commit `.mcp.json`** with real API keys — it's in `.gitignore`
 - Use **environment variables** for all credentials
-- The `.mcp.json.example` file is safe to commit - it only contains `${VAR}` placeholders
-- Each user configures their own credentials locally
+- The `.mcp.json.example` file is safe to commit — it only contains `${VAR}` placeholders
+
+---
 
 ## API Rate Limits
-
-Be aware of rate limits when using integrations:
 
 | Platform | Rate Limit |
 |----------|-----------|
@@ -298,6 +322,43 @@ Be aware of rate limits when using integrations:
 | Fitbit | Varies by endpoint |
 | Garmin | Contact for limits |
 | Hevy | Check Pro tier limits |
+
+---
+
+## Changelog
+
+### v1.4
+- Added `update-agent` command — auto-pulls latest version from GitHub via `git pull`
+- Added `setup` as an explicit command trigger (previously first-run only)
+- Added welcome message on setup listing all available commands
+- Renamed `update` command to `review` for clarity
+
+### v1.3
+- Added `event <description>` command — log injuries, illness, and life events to `context.md` with science-based training advice
+- Added `pr <description>` command — log personal records chronologically with 6-month progress summaries
+- `review` (formerly `update`) now detects and logs new PRs from data files and APIs
+- Strengthened evidence standards: peer-reviewed sources highly preferred, links required, missing links flagged explicitly
+- Improved skeptical analysis: now requires quotations, researcher names, and links when evaluating claims
+
+### v1.2
+- Added automatic initial setup flow on first run
+- Setup collects goals, body stats, and API platform links
+- Offers to download last 2 months of fitness history on setup
+- Added progress review to the `update`/`review` command with science-backed feedback
+
+### v1.1
+- Added automatic directory initialization (`~/fitness-advisor/`, `data/`, `knowledge/`) on startup
+- Added user context management — reads and updates `context.md` before every response
+- Added body composition data tracking — parses PDFs, images, and text files from `data/`
+- Added debunking & knowledge management — saves myth-busting articles to `knowledge/`
+
+### v1.0
+- Initial release
+- Evidence-based fitness guidance on workouts, nutrition, body composition, and exercise science
+- Platform integrations: Hevy, Strava, Fitbit, Garmin, Under Armour
+- `/fitness` shortcut for quick access in Claude Code
+
+---
 
 ## Contributing
 
@@ -308,31 +369,21 @@ Contributions welcome! Please:
 3. Make your changes
 4. Submit a pull request
 
+---
+
 ## License
 
 This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
 
-**You are free to:**
-- Use this software free of charge
-- Share and adapt the material
-
-**Under these conditions:**
 - **Attribution**: You must give credit to Marcin Konkel (https://marcinkonkel.com)
 - **NonCommercial**: You may not sell or use this for commercial purposes
 
 See [LICENSE](LICENSE) for full details.
 
-## Author
-
-**Marcin Konkel**
-- Website: [https://marcinkonkel.com](https://marcinkonkel.com)
-
-## Acknowledgments
-
-- Built for [Claude Code](https://claude.ai/claude-code)
-- Fitness science guidance based on peer-reviewed research
-- Platform integrations use official APIs
-
 ---
 
-**Questions?** Open an issue on GitHub or visit [marcinkonkel.com](https://marcinkonkel.com)
+## Author
+
+**Marcin Konkel** — [marcinkonkel.com](https://marcinkonkel.com)
+
+Built for [Claude Code](https://claude.ai/claude-code). Questions? Open an issue on GitHub.
