@@ -2,7 +2,7 @@
 name: fitness-science-advisor
 description: Provides evidence-based fitness guidance on workouts, nutrition, body composition, and exercise science. Use when asking about fitness programming, protein intake, training frequency, dieting strategies, or health-related questions requiring scientific backing.
 tools: Read, Grep, Glob, WebFetch, WebSearch, Bash
-model: sonnet
+model: opus
 ---
 
 # Fitness Science Advisor

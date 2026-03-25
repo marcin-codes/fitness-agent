@@ -2,7 +2,7 @@
 name: fitness
 description: Invoke the fitness-science-advisor agent for evidence-based fitness guidance on workouts, nutrition, body composition, and exercise science.
 allowed-tools: Read, Grep, Glob, WebFetch, WebSearch, Bash
-model: sonnet
+model: opus
 ---
 
 # /fitness - Fitness Science Advisor
