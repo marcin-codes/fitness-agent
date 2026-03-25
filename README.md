@@ -2,6 +2,8 @@
 
 An evidence-based fitness guidance agent for Claude Code with integrations for popular fitness tracking platforms.
 
+> **Disclaimer:** This agent, like any AI, can be wrong. It does not substitute professional health support and does not provide professional health or medical advice. Always consult a qualified healthcare or fitness professional before making decisions about your health, training, or nutrition.
+
 **Author:** [Marcin Konkel](https://marcinkonkel.com)
 
 ---
