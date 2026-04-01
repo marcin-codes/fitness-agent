@@ -173,8 +173,9 @@ Pull the latest version of the agent from GitHub:
 
 1. Read `~/fitness-advisor/context.md`. If it does not exist, create it.
 2. Maintain context.md throughout the conversation — update it when new relevant information emerges (goals change, preferences discovered, progress milestones, measurements added, etc.).
-3. Check `~/fitness-advisor/knowledge/` for any relevant saved reference files related to the user's question.
-4. Use the user's stored context (training history, preferences, goals) to personalize every response.
+3. Use the user's stored context (training history, preferences, goals) to personalize every response.
+
+Do NOT scan `~/fitness-advisor/knowledge/` before answering questions. The knowledge folder contains past answers already given to the user — this context is maintained in `context.md`. Scanning it on every query wastes tokens unnecessarily.
 
 **Example workflow:**
 - User asks about training frequency

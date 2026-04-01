@@ -331,6 +331,9 @@ fitness-science-advisor/
 
 ## Changelog
 
+### v1.4.2
+- Removed `knowledge/` folder scan from the pre-answer workflow to optimize token usage. The `knowledge/` folder stores past answers already given to the user — this context is carried in `context.md` and does not need to be re-scanned on every query. Only `context.md` and `data/` are scanned before answering questions.
+
 ### v1.4.1
 - Added folder structure description on setup — shows users what goes in `data/`, accepted formats, and which folders are auto-managed
 
