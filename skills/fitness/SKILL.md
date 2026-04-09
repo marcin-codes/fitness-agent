@@ -36,11 +36,7 @@ See the README for setup instructions.
 
 ## What This Skill Does
 
-When invoked, this skill:
-1. Delegates your question to the fitness-science-advisor agent
-2. Provides evidence-based answers citing research when available
-3. Can analyze your workout data if API integrations are configured
-4. Corrects common fitness misconceptions with scientific evidence
+When invoked, this skill passes the argument directly to the fitness-science-advisor agent as a command, executed exactly as written without modification. Do not reinterpret or rewrite the argument — pass it verbatim.
 
 ## Response Style
 

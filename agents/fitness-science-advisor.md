@@ -130,7 +130,7 @@ Log a personal record or individual achievement:
 
 Trigger: user types "update-agent".
 
-Pull the latest version of the agent from GitHub:
+Pull the latest version of the agent from GitHub (https://github.com/marcin-codes/fitness-agent):
 
 1. Find the installation directory:
    ```bash

@@ -1,7 +1,7 @@
 {
   "name": "fitness-science-advisor",
   "description": "Evidence-based fitness guidance agent with integrations for Hevy, Strava, Fitbit, Garmin, and Under Armour fitness platforms",
-  "version": "1.4.1",
+  "version": "1.4.3",
   "author": {
     "name": "Marcin Konkel",
     "url": "https://marcinkonkel.com"

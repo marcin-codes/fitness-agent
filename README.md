@@ -137,10 +137,11 @@ pr Deadlift 180kg x 1 - new 1RM
 
 ### `update-agent`
 
-Pull the latest version of the agent from GitHub:
+Pull the latest version of the agent from GitHub (https://github.com/marcin-codes/fitness-agent):
 
 - Automatically locates the installation directory
-- Runs `git pull origin main`
+- If installed via `git clone`, runs `git pull origin main` in the repo root
+- If not cloned from git, pulls the latest version directly from the GitHub repository
 - Reports what changed or confirms the agent is up to date
 - Prompts you to restart Claude Code if needed
 
@@ -330,6 +331,10 @@ fitness-science-advisor/
 ---
 
 ## Changelog
+
+### v1.4.3
+- Improved `/fitness` skill command execution — arguments are now passed verbatim to the agent without reinterpretation, ensuring commands like `review` trigger the correct agent workflow
+- `update-agent` now includes the direct GitHub repo URL and works even if the agent was not installed via `git clone`
 
 ### v1.4.2
 - Removed `knowledge/` folder scan from the pre-answer workflow to optimize token usage. The `knowledge/` folder stores past answers already given to the user — this context is carried in `context.md` and does not need to be re-scanned on every query. Only `context.md` and `data/` are scanned before answering questions.
