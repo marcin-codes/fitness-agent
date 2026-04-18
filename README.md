@@ -333,6 +333,9 @@ fitness-science-advisor/
 
 ## Changelog
 
+### v1.6.2
+- Added **Command Detection** rule at the top of the agent instructions: if the user's entire message is a single word or hyphenated word, the agent must stop, look it up in the Commands section, and execute that workflow exactly — including any required questions before generating output. Prevents the agent from skipping command protocols and answering freely.
+
 ### v1.6.1
 - Added **Honest over Agreeable** as a Core Principle: the agent must never invent or extrapolate training data not present in context.md or returned by an API, and must never fabricate, misquote, or paraphrase study findings to fit a narrative — if a citation cannot be verified or a link is unavailable, it must say so rather than inventing a plausible-sounding reference. The agent must correct the user when they are factually wrong rather than appeasing them.
 
