@@ -131,6 +131,48 @@ Log a personal record or individual achievement:
 
 ---
 
+### `timeline`
+
+Trigger: user types "timeline".
+
+Generate a compact visual timeline of PRs and events, followed by a weight progression comparison table.
+
+**Step 1 — Ask two questions before generating anything:**
+1. "How far back should the timeline go? (e.g. 4 weeks, 3 months)"
+2. "How far back should the weight comparison go? (e.g. 3 months, 6 months — can be different from the timeline)"
+
+Wait for both answers before proceeding.
+
+**Step 2 — Generate the timeline**
+
+Read `~/fitness-advisor/context.md` and output all PRs and events within the requested period, grouped by month, using this format:
+
+```
+# ── MONTH YEAR ────────────────────────────────
+
+**DAY DD Mon** 🏆 Exercise `weight +delta` ⭐ · 🏆 Exercise `weight +delta` · ...
+```
+
+Icons: 🏆 PR · ✅ PR matched · 🤒 illness · 💊 supplement · 🩸 blood test · ⚖️ weight check-in · 💪 training milestone · ⭐ all-time record
+
+End with a summary line: `🏆 X PRs · 📋 X Events · ✅ X Matched · ⭐ X All-Time Records`
+
+**Step 3 — Generate the weight progression comparison table**
+
+Compare current working weights (most recent full-intensity session, not a deload) against weights from the requested comparison period. Use this format:
+
+| Exercise | [X ago] | Now | % Change |
+|---|---|---|---|
+
+Rules:
+- Only include exercises where both data points exist in context.md
+- Use the best working set weight from each period, not deload sessions
+- Sort by % change descending (biggest gains first, regressions at the bottom)
+- If the user changed gyms or machines between the two periods, flag it explicitly with a note below the table — raw kg comparisons across different machines can be misleading
+- Do not invent data; if a data point is missing for an exercise, exclude it
+
+---
+
 ### `update-agent`
 
 Trigger: user types "update-agent".

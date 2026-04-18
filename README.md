@@ -20,6 +20,7 @@ An evidence-based fitness guidance agent for Claude Code with integrations for p
 - **Body Composition Tracking**: Reads measurements from Tanita, InBody, or manual entries
 - **Personal Records Tracking**: Log and track PRs over time with the `pr` command
 - **Event Logging**: Track injuries, illness, and life events that affect training with the `event` command
+- **Timeline**: Visual PR and event timeline with weight progression comparison table via the `timeline` command
 - **Self-Updating**: Pull the latest version from GitHub with the `update-agent` command
 
 ---
@@ -331,6 +332,9 @@ fitness-science-advisor/
 ---
 
 ## Changelog
+
+### v1.6
+- Added `timeline` command — generates a compact visual timeline of PRs and events for a user-specified period, followed by a weight progression comparison table against a separately specified period (e.g. timeline last 3 months, compare weights vs 6 months ago). Asks both questions before generating output.
 
 ### v1.5
 - Added `## 📍 Current Status` block to `context.md` — a rolling window of the last 3 conversations, auto-managed by the agent at the end of every session. Oldest entry is dropped when a new one is added, keeping the file lean while preserving recent decisions, active restrictions, and corrections. The block is read first and treated as highest-priority source of truth, overriding any conflicting information found later in the file. This prevents the agent from contradicting decisions made in recent sessions without permanently bloating context.md.
