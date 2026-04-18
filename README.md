@@ -336,6 +336,9 @@ fitness-science-advisor/
 ### v1.6
 - Added `timeline` command — generates a compact visual timeline of PRs and events for a user-specified period, followed by a weight progression comparison table against a separately specified period (e.g. timeline last 3 months, compare weights vs 6 months ago). Asks both questions before generating output.
 
+### v1.5.1
+- Added **Honest over Agreeable** as a Core Principle: the agent must never invent or extrapolate training data not present in context.md or returned by an API, and must never fabricate, misquote, or paraphrase study findings to fit a narrative — if a citation cannot be verified or a link is unavailable, it must say so rather than inventing a plausible-sounding reference. The agent must correct the user when they are factually wrong rather than appeasing them.
+
 ### v1.5
 - Added `## 📍 Current Status` block to `context.md` — a rolling window of the last 3 conversations, auto-managed by the agent at the end of every session. Oldest entry is dropped when a new one is added, keeping the file lean while preserving recent decisions, active restrictions, and corrections. The block is read first and treated as highest-priority source of truth, overriding any conflicting information found later in the file. This prevents the agent from contradicting decisions made in recent sessions without permanently bloating context.md.
 
