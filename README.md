@@ -332,6 +332,9 @@ fitness-science-advisor/
 
 ## Changelog
 
+### v1.5
+- Added `## 📍 Current Status` block to `context.md` — a rolling window of the last 3 conversations, auto-managed by the agent at the end of every session. Oldest entry is dropped when a new one is added, keeping the file lean while preserving recent decisions, active restrictions, and corrections. The block is read first and treated as highest-priority source of truth, overriding any conflicting information found later in the file. This prevents the agent from contradicting decisions made in recent sessions without permanently bloating context.md.
+
 ### v1.4.3
 - Improved `/fitness` skill command execution — arguments are now passed verbatim to the agent without reinterpretation, ensuring commands like `review` trigger the correct agent workflow
 - `update-agent` now includes the direct GitHub repo URL and works even if the agent was not installed via `git clone`
