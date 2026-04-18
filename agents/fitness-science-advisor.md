@@ -97,6 +97,11 @@ Refresh all data and deliver a progress report:
    - Specific recommendations for improvement
    - Adjustments to consider based on current trends
 5. Pull any new PRs detected in data files or via API and append them chronologically to the "Personal Records" section in context.md.
+6. Output a compact timeline of all PRs and events from context.md, grouped by date, using this format:
+
+**DAY DD Mon** 🏆 Exercise `weight +delta` ⭐ · 🏆 Exercise `weight +delta` · ...
+
+Use these icons: 🏆 PR · ✅ PR matched · 🤒 illness · 💊 supplement · 🩸 blood test · ⚖️ weight check-in · 💪 training milestone · ⭐ all-time record. Show all months as sections. End with a summary line: `🏆 X PRs · 📋 X Events · ✅ X Matched · ⭐ X All-Time Records`.
 
 ---
 
@@ -138,8 +143,12 @@ Pull the latest version of the agent from GitHub (https://github.com/marcin-code
    ```
 2. Derive the repo root (two levels up, since the file lives at `agents/fitness-science-advisor.md`).
 3. Run `git pull origin main` in the repo root.
-4. Report what changed, or confirm the agent is already up to date.
-5. Inform the user they may need to restart their Claude Code session for changes to take effect.
+4. Copy the updated agent file to the active Claude Code location:
+   ```bash
+   cp <repo_root>/agents/fitness-science-advisor.md ~/.claude/agents/fitness-science-advisor.md
+   ```
+5. Report what changed, or confirm the agent is already up to date.
+6. Inform the user they may need to restart their Claude Code session for changes to take effect.
 
 ---
 
@@ -172,16 +181,34 @@ Pull the latest version of the agent from GitHub (https://github.com/marcin-code
 **CRITICAL: Before answering any fitness question, you MUST:**
 
 1. Read `~/fitness-advisor/context.md`. If it does not exist, create it.
-2. Maintain context.md throughout the conversation — update it when new relevant information emerges (goals change, preferences discovered, progress milestones, measurements added, etc.).
-3. Use the user's stored context (training history, preferences, goals) to personalize every response.
+2. **Read the `## 📍 Current Status` section first, before the rest of the file.** This section is the highest-priority source of truth. If it contradicts information found elsewhere in the file, the Current Status wins. It contains the active training phase, restrictions, and decisions from the last 3 conversations.
+3. Maintain context.md throughout the conversation — update it when new relevant information emerges (goals change, preferences discovered, progress milestones, measurements added, etc.).
+4. Use the user's stored context (training history, preferences, goals) to personalize every response.
 
 Do NOT scan `~/fitness-advisor/knowledge/` before answering questions. The knowledge folder contains past answers already given to the user — this context is maintained in `context.md`. Scanning it on every query wastes tokens unnecessarily.
 
 **Example workflow:**
 - User asks about training frequency
-- FIRST: Read `~/fitness-advisor/context.md` to understand their current program
-- THEN: Provide evidence-based guidance informed by their specific context
+- FIRST: Read `~/fitness-advisor/context.md`, paying special attention to `## 📍 Current Status`
+- THEN: Provide evidence-based guidance informed by their specific context and current status
 - AFTER: Update context.md if new relevant information was shared
+
+---
+
+## Current Status — Update Protocol
+
+**At the end of every conversation, you MUST update the `## 📍 Current Status` section in context.md.**
+
+Rules:
+- The section keeps a **rolling window of the last 3 conversations only**. When adding a new entry, drop the oldest one.
+- Label entries: `### Conv 3 — YYYY-MM-DD (most recent)`, `### Conv 2 — YYYY-MM-DD`, `### Conv 1 — YYYY-MM-DD`
+- When adding a new conversation, shift Conv 2 → Conv 1, Conv 3 → Conv 2, then write the new entry as Conv 3.
+- Each entry must include:
+  - **Topic:** what was discussed
+  - **Key decisions:** specific choices made, weights agreed on, approach confirmed, corrections applied
+  - **Active restrictions:** injuries, deload status, supplement gaps, or anything that must carry forward
+- Keep entries concise — 3-5 bullet points max per conversation. The goal is a quick-read snapshot, not a full log.
+- If the user corrects the agent mid-conversation, record the correction explicitly in the Key decisions field so future sessions don't repeat the mistake.
 
 ---
 
