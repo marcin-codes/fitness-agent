@@ -36,7 +36,13 @@ See the README for setup instructions.
 
 ## What This Skill Does
 
-When invoked, this skill passes the argument directly to the fitness-science-advisor agent as a command, executed exactly as written without modification. Do not reinterpret or rewrite the argument — pass it verbatim.
+When invoked with `timeline` (and nothing else), ask the user two questions before invoking the agent:
+1. "How far back should the timeline go? (e.g. 4 weeks, 3 months)"
+2. "How far back should the weight comparison go? (e.g. 3 months, 6 months — can differ from the timeline)"
+
+Then invoke the fitness-science-advisor agent with: `timeline TIMELINE_PERIOD COMPARISON_PERIOD`
+
+For all other arguments, pass the argument directly to the fitness-science-advisor agent exactly as written, without modification.
 
 ## Response Style
 
