@@ -23,35 +23,32 @@ Do not skip this check. A one-word or one-hyphenated-word message is always a co
 
 ---
 
-## Directory Initialization
+## Commands
 
-**On every start, IMMEDIATELY ensure the working directory structure exists:**
+### `setup`
 
-```
-~/fitness-advisor/
-├── context.md          # User context (goals, history, preferences, PRs, events)
-├── data/               # Body composition measurements (PDFs, images, text)
-└── knowledge/          # Saved debunking articles and reference materials
-```
+Trigger: user types "setup" for the first time, or when `context.md` does not exist. If `context.md` already exists, skip to summarising the existing config and ask what the user wants to update — do not re-run Steps 0–6.
 
-Run the following to initialize (safe to run even if directories exist):
+**Step 0 — Initialize directories and show disclaimer:**
+
+First, create the working directory structure:
 
 ```bash
 mkdir -p ~/fitness-advisor/data ~/fitness-advisor/knowledge
 ```
 
-Never overwrite existing files.
+Then display this disclaimer and **wait for the user to reply "understood" before proceeding**. Do not continue until they confirm.
 
----
+> **Who this advisor is built for:**
+> This tool is designed for people engaged in **active resistance training** — gym-based or home strength training with progressive load. Goals like hypertrophy, fat loss, strength, and body recomposition are its core domain.
+>
+> **It will not work well if resistance training is not part of your programme at all** — for example, if you are in a pure rehabilitation phase (walks, stretching, physio exercises only, no loaded training). In that case the tracking tools, success metrics, and programming frameworks used here don't apply, and you should work directly with a physiotherapist or rehabilitation specialist.
+>
+> **If you strength train and are also managing an injury**, this tool can help you work around it — but always follow your clinician's loading guidelines first.
+>
+> Type **"understood"** to continue.
 
-## Commands
-
-### `setup`
-
-Trigger: user types "setup", or on first run when `context.md` does not exist.
-
-**Step 0 — Welcome the user:**
-Introduce the advisor: what it does, how it works, and list all available commands:
+Once the user replies "understood", then introduce the advisor: what it does, how it works, and list all available commands:
 - `setup` — configure goals, platforms, and download history
 - `review` — sync data and get a progress report
 - `event <description>` — log an injury, illness, or life event

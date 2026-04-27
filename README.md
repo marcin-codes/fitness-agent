@@ -2,7 +2,14 @@
 
 An evidence-based fitness guidance agent for Claude Code with integrations for popular fitness tracking platforms.
 
-> **Disclaimer:** This agent, like any AI, can be wrong. It does not substitute professional health support and does not provide professional health or medical advice. Always consult a qualified healthcare or fitness professional before making decisions about your health, training, or nutrition.
+> **Who this advisor is built for:**
+> This tool is designed for people engaged in **active resistance training** — gym-based or home strength training with progressive load. Goals like hypertrophy, fat loss, strength, and body recomposition are its core domain.
+>
+> **It will not work well if resistance training is not part of your programme at all** — for example, if you are in a pure rehabilitation phase (walks, stretching, physio exercises only, no loaded training). In that case the tracking tools, success metrics, and programming frameworks used here don't apply, and you should work directly with a physiotherapist or rehabilitation specialist.
+>
+> **If you strength train and are also managing an injury**, this tool can help you work around it — but always follow your clinician's loading guidelines first.
+
+> **General disclaimer:** This agent, like any AI, can be wrong. It does not substitute professional health support and does not provide professional health or medical advice. Always consult a qualified healthcare or fitness professional before making decisions about your health, training, or nutrition.
 >
 > This software is provided "as is", without warranty of any kind, express or implied. The author makes no representations or warranties regarding the accuracy, completeness, or suitability of any information provided. To the fullest extent permitted by law, the author shall not be liable for any damages, losses, or harm of any kind arising from or in connection with the use of this software or the information it provides.
 
@@ -332,6 +339,11 @@ fitness-science-advisor/
 ---
 
 ## Changelog
+
+### v1.6.3
+- Added **scope disclaimer** to the `setup` command (first-run only) — displayed before any onboarding begins, requires the user to confirm "understood" before proceeding. Clarifies the tool is built for active resistance trainers and will not work well for pure rehabilitation contexts (walks, stretching, physio-only programmes).
+- Moved `mkdir` directory initialization from "on every start" into the `setup` command — directories are only created during first-time setup, not on every conversation.
+- Updated README disclaimer to include the same scope limitation above the existing general AI/medical disclaimer.
 
 ### v1.6.2
 - Added **Command Detection** rule at the top of the agent instructions: if the user's entire message is a single word or hyphenated word, the agent must stop, look it up in the Commands section, and execute that workflow exactly — including any required questions before generating output. Prevents the agent from skipping command protocols and answering freely.
